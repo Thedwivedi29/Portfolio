@@ -1,0 +1,469 @@
+@use 'variables' as *;
+
+// Glass Panel Component
+.glass-panel {
+    background: $glass-bg;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid $glass-border;
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: $glass-shadow;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        border-color: rgba($color-primary, 0.3);
+    }
+
+    @media (max-width: $bp-mobile) {
+        padding: 1.5rem;
+    }
+}
+
+// Buttons
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: $font-secondary;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    outline: none;
+
+    &.btn-primary {
+        background: linear-gradient(90deg, $color-primary, $color-secondary);
+        color: #000;
+        box-shadow: 0 4px 15px rgba($color-primary, 0.4);
+
+        &:hover {
+            box-shadow: 0 6px 20px rgba($color-primary, 0.6);
+            transform: scale(1.05);
+        }
+    }
+}
+
+// Hero Section
+.hero {
+    text-align: left;
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .subtitle {
+        color: $color-primary;
+        letter-spacing: 2px;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .title {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: linear-gradient(90deg, #fff, #a0a0a0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        @media (max-width: $bp-mobile) {
+            font-size: 3rem;
+        }
+    }
+
+    .roles {
+        font-size: 1.2rem;
+        color: $color-accent;
+        margin-bottom: 2rem;
+        font-weight: 400;
+
+        .dot {
+            color: $color-text-muted;
+            margin: 0 0.5rem;
+        }
+
+        @media (max-width: $bp-mobile) {
+            font-size: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            .dot { display: none; }
+        }
+    }
+
+    .bio {
+        color: $color-text-muted;
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+// Services/What I Do
+.service-card {
+    text-align: center;
+    padding: 2.5rem;
+
+    .icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 1.5rem;
+        color: $color-primary;
+        background: rgba($color-primary, 0.1);
+        border-radius: 50%;
+        padding: 15px;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #fff;
+    }
+
+    p {
+        color: $color-text-muted;
+        font-size: 0.95rem;
+    }
+}
+
+// About Section
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+
+    .role-subtitle {
+        color: $color-secondary;
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    p {
+        color: $color-text-muted;
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .skills-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+
+        .skill-item {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: $color-primary;
+            margin: 0;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                border-color: $color-primary;
+                color: #fff;
+                box-shadow: 0 4px 15px rgba($color-primary, 0.4);
+            }
+        }
+    }
+}
+
+// Projects Section - Flip Cards
+.project-card {
+    background-color: transparent;
+    perspective: 1000px;
+    height: 380px;
+    
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        transform-style: preserve-3d;
+    }
+
+    &:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        // Override some glass-panel defaults for the inner cards
+        margin: 0;
+
+        @media (max-width: $bp-mobile) {
+            padding: 1.2rem;
+        }
+    }
+
+    .flip-card-front {
+        h3 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .lang {
+            color: $color-primary;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba($color-primary, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+    }
+
+    .flip-card-back {
+        transform: rotateY(180deg);
+        background: rgba(255, 255, 255, 0.05); // slightly lighter for the back
+        border-color: rgba($color-primary, 0.3);
+        
+        p {
+            color: $color-text;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+
+            span {
+                font-size: 0.75rem;
+                background: rgba(255, 255, 255, 0.05);
+                color: $color-text;
+                padding: 0.3rem 0.8rem;
+                border-radius: 20px;
+                border: 1px solid rgba($color-primary, 0.4);
+            }
+        }
+
+        .btn-link {
+            color: $color-primary;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            
+            &:hover {
+                border-color: $color-primary;
+            }
+        }
+    }
+}
+
+// Contact Section
+.contact-info {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1rem;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.02);
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        svg {
+            width: 30px;
+            height: 30px;
+            color: $color-primary;
+        }
+
+        span {
+            color: #fff;
+            font-size: 1.1rem;
+        }
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: $color-primary;
+            transition: all 0.3s ease;
+            border: 1px solid rgba($color-primary, 0.2);
+
+            &:hover {
+                background: $color-primary;
+                color: #000;
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba($color-primary, 0.4);
+            }
+
+            svg {
+                width: 24px;
+                height: 24px;
+                color: inherit;
+            }
+        }
+    }
+}
+
+// Resume Section
+.resume-col {
+    .col-title {
+        font-size: 1.8rem;
+        color: $color-primary;
+        margin-bottom: 2rem;
+    }
+}
+
+.resume-item {
+    padding: 2rem;
+    margin-bottom: 2rem;
+    
+    h4 {
+        font-size: 1.3rem;
+        color: #fff;
+        margin-bottom: 0.5rem;
+    }
+    
+    .company {
+        display: block;
+        color: $color-secondary;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .date {
+        display: block;
+        font-size: 0.85rem;
+        color: $color-text-muted;
+        margin-bottom: 1rem;
+        font-style: italic;
+    }
+
+    ul {
+        list-style-position: outside;
+        margin-left: 1rem;
+        color: $color-text-muted;
+        font-size: 0.95rem;
+        li {
+            margin-bottom: 0.5rem;
+        }
+    }
+}
+
+.timeline {
+    border-left: 2px solid rgba($color-primary, 0.3);
+    padding-left: 2rem;
+    margin-left: 1rem;
+
+    .timeline-item {
+        position: relative;
+        padding: 2rem;
+        margin-bottom: 2rem;
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.6rem; // Accounts for padding-left and border width
+            top: 2rem;
+            width: 16px;
+            height: 16px;
+            background: $color-bg;
+            border: 3px solid $color-primary;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        h4 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .company {
+            display: block;
+            color: $color-secondary;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .date {
+            display: block;
+            font-size: 0.85rem;
+            color: $color-text-muted;
+            font-style: italic;
+        }
+    }
+}
+
+// Accomplishments Section
+.acc-card {
+    padding: 2rem;
+
+    h3 {
+        font-size: 1.5rem;
+        color: $color-primary;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba($color-primary, 0.2);
+    }
+
+    ul {
+        list-style-type: none;
+        
+        li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: $color-text;
+            font-size: 0.95rem;
+
+            &::before {
+                content: '▹';
+                position: absolute;
+                left: 0;
+                color: $color-accent;
+            }
+        }
+    }
+}
